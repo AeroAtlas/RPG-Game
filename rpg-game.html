@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="UTF-8">
+    <title>Word Guess Game</title>
+    <!-- Added link to the jQuery Library -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+    <!-- Added a link to Bootstrap-->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+
+    <!-- Added a link to CSS -->
+    <!-- <link rel="stylesheet" type="text/css" href="guess.css"> -->
+
+  </head>
+  <body>
+    <!-- class characters -->
+    <!-- id's -->
+    <!-- values -->
+    <!-- have it display the 4 characters first and then
+    get rid off all but the one you chose  -->
+    <div class="container">
+      <div class="row">
+        <div class="col-md-6">
+          <img alt="" src="rrr.png" class="face" id="char1" value="1"/>
+        </div>
+        <div class="col-md-6">
+          <img alt="" src="rrr.png" class="face" id="char2" value="2"/>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-6">
+          <img alt="" src="rrr.png" class="face" id="char3" value="3"/>
+        </div>
+        <div class="col-md-6">
+          <img alt="" src="rrr.png" class="face" id="char4" value="4"/>
+        </div>
+      </div>
+    </div>
+    <!-- Need to add response css for the items -->
+
+  <script type="text/javascript">
+    $(document).ready(function() {
+      var attack; var counter; var health;
+    //Objects for each character
+    
+    // function character(){
+      var char = {};
+      var char1 = {
+        attack: 5,
+        counter: 5,
+        health: 10,
+        attNum: 0
+      }
+      var char2 = {
+        attack: 15,
+        counter: 5,
+        health: 15,
+        attNum: 0
+      }
+      var char3 = {
+        attack: 10,
+        counter: 5,
+        health: 30,
+        attNum: 0
+      }
+      var char4 = {
+        attack: 5,
+        counter: 20,
+        health: 10,
+        attNum: 0
+      }
+      var enemy = {
+        attack: 5,
+        counter: 5,
+        health: 10,
+        attNum: 0
+      }
+    // }
+
+    //Which button did you press (temp solution)
+    var b = 0;
+    var choice = false;
+    $("#char1").on("click", function(){
+      b = 1;
+    })
+    $("#char2").on("click", function(){
+      b = 2;
+    })
+    $("#char3").on("click", function(){
+      b = 3;
+    })
+    $("#char4").on("click", function(){
+      b = 4;
+    })
+    
+    //If character isn't chosen yet
+    if(choice === false){
+    //Automated checker of which button you pressed but needs other code atm to work
+      $(".face").on("click", function(){
+        console.log('fucktard')
+        var a = document.getElementsByTagName('img')[b-1].getAttribute('value'); //very important
+        console.log(a)
+        switch(a){
+          case "1":
+          char = char1;
+          console.log(char1)
+          // $("#first-number").text($("#button-0").val()); //use something like this later
+          break;
+          case "2":
+          char = char2;
+          console.log(char2)
+          break;
+          case "3":
+          char = char3;
+          console.log(char3)
+          break;
+          case "4":
+          char = char4;
+          console.log(char4)
+          break;
+          default:
+        }
+      })
+    }
+
+    function chosenChar(a){
+
+    }
+
+    //Need to change CSS to only show the selected character and new enemy characters
+
+    //Need to have a click event for enemy
+    
+    //Need something to check if you attacked
+
+  
+
+
+
+
+    //Click the character you want to play
+    // $(".character").on("click",  function(){
+    //     //writes down what character you picked
+    //     var that = $(this).val()
+    //     switch(that){
+    //         case "1":
+    //         char = char1;
+    //         console.log(char);
+    //         break;
+    //         case "2":
+    //         char = char2;
+    //         console.log(char);
+    //         break;
+    //         case "3":
+    //         char = char3;
+    //         console.log(char);
+    //         break;
+    //         case "4":
+    //         char = char4;
+    //         console.log(char);
+    //         break;
+    //         default:
+    //     }
+    // })
+
+
+      //need variables
+      //var health points, var attack power, counter attack power
+      //click event for clicking on pictures
+      ////connect it to bootstraps
+      //click even for killing enemies on pictures
+      //--function battle();
+      //select and move enemy to new area
+      //--function attack
+      //add attack button click event
+      ////make it lose hp
+      ////make the oppenent attack you
+      //make it sure that you can attack over and over
+      //increase attack power with every attack
+
+
+
+
+
+
+
+
+
+
+
+    });
+
+
+
+
+    </script>
+
+
+
+  </body>
+  </html>
