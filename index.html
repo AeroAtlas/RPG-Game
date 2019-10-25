@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="UTF-8">
+    <title>Word Guess Game</title>
+    <!-- Added link to the jQuery Library -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+    <!-- Added a link to Bootstrap-->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+
+    <!-- Added a link to CSS -->
+    <!-- <link rel="stylesheet" type="text/css" href="guess.css"> -->
+
+  </head>
+  <body>
+    <!-- class characters -->
+    <!-- id's -->
+    <!-- values -->
+    <!-- have it display the 4 characters first and then
+    get rid off all but the one you chose  -->
+    <div class="container">
+      <!-- Row to show character and enemy -->
+        <div class="row">
+          <div class="col-md-6">
+            <img alt="" src="rrr.png" class="fighter" id="player" value="1" height="420" width="360"/>
+          </div>
+          <div class="col-md-6">
+            <img alt="" src="hatticus.png" class="fighter" id="opponent" value="2" height="420" width="360"/>
+          </div>
+        </div>
+        <!-- Attack Button Shows when click enemy -->
+        <div class="row">
+          <div class="col-md-6">
+              <!-- Need to move button over  -->
+            <button type="button" class="btn btn-danger attack">Attack</button>
+          </div>
+        </div>
+        <!-- Shows HP -->
+        <div class="row">
+          <div class="col-md-6">
+              <h1 id="p-health" class='health'></h1>
+          </div>
+          <div class="col-md-6">
+              <h1 id="e-health" class='health'></h1>
+          </div>
+        </div>
+        <!-- Select a character -->
+      <div class="row">
+        <div class="col-md-6">
+          <img alt="" src="images/meh.png" class="face" id="char1" value="1" height="420" width="360"/>
+        </div>
+        <div class="col-md-6">
+          <img alt="" src="images/boomerCave.png" class="face" id="char2" value="2" height="420" width="360"/>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-6">
+          <img alt="" src="images/boomer.jpg" class="face" id="char3" value="3" height="420" width="360"/>
+        </div>
+        <div class="col-md-6">
+          <img alt="" src="images/rrr.png" class="face" id="char4" value="4" height="420" width="360"/>
+        </div>
+      </div>
+      <!-- Enemies -->
+      <div class="row">
+        <div class="col-md-6">
+          <img alt="" src="hatticus.png" class="enemy" id="enemy1" value="1"/>
+        </div>
+        <div class="col-md-6">
+          <img alt="" src="hatticus.png" class="enemy" id="enemy2" value="2" />
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-6">
+          <img alt="" src="hatticus.png" class="enemy" id="enemy3" value="3"/>
+        </div>
+        <div class="col-md-6">
+          <img alt="" src="hatticus.png" class="enemy" id="enemy4" value="4" />
+        </div>
+      </div>
+
+    </div>
+
+
+  <script type="text/javascript">
+    $(document).ready(function() {
+      //Variables for global scope
+      var attack; var counter; var health; var which;
+      var used = 0; var winNum = 0;
+
+    //Objects for each character
+      var char = {};
+      var enem = {};
+      var char1 = {
+        attack: 7,
+        counter: 5,
+        health: 30,
+        attNum: 0
+      }
+      var char2 = {
+        attack: 15,
+        counter: 6,
+        health: 25,
+        attNum: 0
+      }
+      var char3 = {
+        attack: 10,
+        counter: 7,
+        health: 40,
+        attNum: 0
+      }
+      var char4 = {
+        attack: 1,
+        counter: 8,
+        health: 60,
+        attNum: 0
+      }
+      var enemy1 = {
+        which: 1,
+        counter: 3,
+        health: 4,
+        attNum: 0
+      }
+      var enemy2 = {
+        which: 2,
+        counter: 4,
+        health: 8,
+        attNum: 0
+      }
+      var enemy3 = {
+        which: 3,
+        counter: 6,
+        health: 12,
+        attNum: 0
+      }
+      var enemy4 = {
+        which: 4,
+        counter: 5,
+        health: 20,
+        attNum: 0
+      }
+
+    //Gives these classes temperary hide
+    // $('.enemy').addClass('hide');
+    // $('.attack').addClass('hide');
+    // $('.fighter').addClass('hide');
+    // $('.health').addClass('hide');
+    $('.enemy').hide()
+    $('.attack').hide()
+    $('.fighter').hide()
+    $('.health').hide()
+
+
+    //Figures out which character you selected
+    var b = 0; var c = 0;
+    var choice = false;
+    //Which Character did you click
+    $("#char1").on("click", function(){
+      b = 1;
+      $('img#player').attr('src', 'images/meh.png')
+    })
+    $("#char2").on("click", function(){
+      b = 2;
+      $('img#player').attr('src', 'images/boomerCave.png')
+    })
+    $("#char3").on("click", function(){
+      b = 3;
+      $('img#player').attr('src', 'images/boomer.jpg')
+    })
+    $("#char4").on("click", function(){
+      b = 4;
+      $('img#player').attr('src', 'images/rrr.png')
+    })
+
+    //Which Enemy did you click
+    $("#enemy1").on("click", function(){
+      c = 1;
+      $('img#opponent').attr('src', 'hatticus.png')
+      console.log(c)
+    })
+    $("#enemy2").on("click", function(){
+      c = 2;
+      $('img#opponent').attr('src', 'hatticus.png')
+      console.log(c)
+    })
+    $("#enemy3").on("click", function(){
+      $('img#opponent').attr('src', 'hatticus.png')
+      c = 3;
+      console.log(c)
+    })
+    $("#enemy4").on("click", function(){
+      $('img#opponent').attr('src', 'hatticus.png')
+      c = 4;
+      console.log(c)
+    })
+    
+    //Shows the enemies
+    function showEnemies(){
+      $(".enemy").show()
+      //$(".enemy").removeClass('hide').addClass("show")
+    }
+
+    //Puts the right picture for the battle zone
+    function chosenChar(){
+      $("#player").show()
+      //$("#player").removeClass('hide').addClass("show")
+      $(".face").hide()
+    }
+
+    //Character Selector
+    $(".face").on("click", function(){
+      var a = document.getElementsByTagName('img')[b-1].getAttribute('value'); //very important
+      console.log(a)
+      switch(a){
+        case "1":
+        char = char1;
+        console.log(char)
+        chosenChar()
+        showEnemies()
+        break;
+        case "2":
+        char = char2;
+        console.log(char)
+        chosenChar()
+        showEnemies()
+        break;
+        case "3":
+        char = char3;
+        console.log(char)
+        chosenChar()
+        showEnemies()
+        break;
+        case "4":
+        char = char4;
+        console.log(char)
+        chosenChar()
+        showEnemies()
+        break;
+        default:
+      }
+    })
+
+    //Selecting Enemy
+    $(".enemy").on("click", function(){
+        var a = document.getElementsByTagName('img')[c+1].getAttribute('value'); //very important
+        console.log(a)
+        switch(a){
+          case "1":
+          enem = enemy1;
+          console.log(enem)
+          break;
+          case "2":
+          enem = enemy2;
+          console.log(enem)
+          break;
+          case "3":
+          enem = enemy3;
+          console.log(enem)
+          break;
+          case "4":
+          enem = enemy4;
+          console.log(enem)
+          break;
+          default:
+        }
+
+        //Moves to the "battle zone"
+        $("#opponent").show()
+        $(".attack").show()
+        $(".enemy").hide()
+        console.log("checking if this works")
+        document.getElementById('e-health').innerHTML = enem.health
+        document.getElementById('p-health').innerHTML = char.health
+        $(".health").show()
+    })
+
+    //Attack and Battle Code
+    $(".attack").on("click", function(){
+      console.log(char.attack)
+      console.log(enem.counter)
+      enem.health = enem.health - char.attack;
+      document.getElementById('e-health').innerHTML = enem.health
+      char.health = char.health - enem.counter;
+      document.getElementById('p-health').innerHTML = char.health
+      char.attack = char.attack + 5;
+      if(enem.health <= 0){
+        alert("Enemy Defeated");
+        $(".enemy").show()
+        $("#opponent").hide()
+        $(".attack").hide()
+        enem.health = 0;
+        document.getElementById('e-health').innerHTML = "";
+        checker()
+        victory()
+      }
+      if(char.health <= 0){
+        console.log("You lose");
+        alert("GAME OVER");
+        location.reload();
+      }
+    })
+
+    function checker(){
+      if(enem.which == enemy1.which){
+        $('img#enemy1').attr('src', '')
+        winNum++;
+      }
+      if(enem.which == enemy2.which){
+        $('img#enemy2').attr('src', '')
+        winNum++;
+      }
+      if(enem.which == enemy3.which){
+        $('img#enemy3').attr('src', '')
+        winNum++;
+      }
+      if(enem.which == enemy4.which){
+        $('img#enemy4').attr('src', '')
+        winNum++;
+      }
+    }
+
+    function victory(){
+      if(winNum >= 4){
+        alert("YOU WIN")
+        location.reload();
+      }
+    }
+      ///Look these up
+      //.attr
+      //.match
+      // myimgID = $id
+      // document.getElementBNyID("wins").innerHJTML = "wins: " + wins);
+      // $("#textBox").toggle
+      //$('#current-score').html('');
+      //var obj ={} 
+      //obj['fruit'] 'banana'
+      //obj.fruit = 'banana'
+    });
+
+
+
+
+    </script>
+
+
+
+  </body>
+  </html>
