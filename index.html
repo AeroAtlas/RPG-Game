@@ -2,7 +2,7 @@
 <html lang="en-us">
   <head>
     <meta charset="UTF-8">
-    <title>Word Guess Game</title>
+    <title>RPG Game</title>
     <!-- Added link to the jQuery Library -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 
     <!-- Added a link to CSS -->
+    <link rel="stylesheet" type="text/css" href="css/style.css">
     <!-- <link rel="stylesheet" type="text/css" href="guess.css"> -->
 
   </head>
@@ -19,6 +20,9 @@
     <!-- values -->
     <!-- have it display the 4 characters first and then
     get rid off all but the one you chose  -->
+    <div class="jumbotron">
+      <h1 class="text-center">Boomer vs Zoomer RPG</h1>
+    </div>
     <div class="container">
       <!-- Row to show character and enemy -->
         <div class="row">
@@ -48,7 +52,7 @@
         <!-- Select a character -->
       <div class="row">
         <div class="col-md-6">
-          <img alt="" src="images/meh.png" class="face" id="char1" value="1" height="420" width="360"/>
+          <img alt="" src="images/boomerDance.gif" class="face" id="char1" value="1" height="420" width="360"/>
         </div>
         <div class="col-md-6">
           <img alt="" src="images/boomerCave.png" class="face" id="char2" value="2" height="420" width="360"/>
@@ -59,24 +63,24 @@
           <img alt="" src="images/boomer.jpg" class="face" id="char3" value="3" height="420" width="360"/>
         </div>
         <div class="col-md-6">
-          <img alt="" src="images/rrr.png" class="face" id="char4" value="4" height="420" width="360"/>
+          <img alt="" src="images/boomerDrink.jpg" class="face" id="char4" value="4" height="420" width="360"/>
         </div>
       </div>
       <!-- Enemies -->
       <div class="row">
         <div class="col-md-6">
-          <img alt="" src="hatticus.png" class="enemy" id="enemy1" value="1"/>
+          <img alt="" src="images/meh.png" class="enemy" id="enemy1" value="1" height="300" width="300"/>
         </div>
         <div class="col-md-6">
-          <img alt="" src="hatticus.png" class="enemy" id="enemy2" value="2" />
+          <img alt="" src="images/zoomerDance.jpg" class="enemy" id="enemy2" value="2" height="300" width="300"/>
         </div>
       </div>
       <div class="row">
         <div class="col-md-6">
-          <img alt="" src="hatticus.png" class="enemy" id="enemy3" value="3"/>
+          <img alt="" src="images/hatticus.png" class="enemy" id="enemy3" value="3" height="300" width="300"/>
         </div>
         <div class="col-md-6">
-          <img alt="" src="hatticus.png" class="enemy" id="enemy4" value="4" />
+          <img alt="" src="images/rrr.png" class="enemy" id="enemy4" value="4" height="300" width="300"/>
         </div>
       </div>
 
@@ -87,57 +91,53 @@
     $(document).ready(function() {
       //Variables for global scope
       var attack; var counter; var health; var which;
-      var used = 0; var winNum = 0;
+      var winNum = 0;
 
     //Objects for each character
       var char = {};
       var enem = {};
       var char1 = {
-        attack: 7,
-        counter: 5,
-        health: 30,
+        attack: 15,
+        health: 35,
         attNum: 0
       }
       var char2 = {
-        attack: 15,
-        counter: 6,
-        health: 25,
+        attack: 20,
+        health: 35,
         attNum: 0
       }
       var char3 = {
-        attack: 10,
-        counter: 7,
-        health: 40,
+        attack: 1,
+        health: 45,
         attNum: 0
       }
       var char4 = {
-        attack: 1,
-        counter: 8,
-        health: 60,
+        attack: 10,
+        health: 40,
         attNum: 0
       }
       var enemy1 = {
         which: 1,
-        counter: 3,
-        health: 4,
+        counter: 5,
+        health: 10,
         attNum: 0
       }
       var enemy2 = {
         which: 2,
-        counter: 4,
-        health: 8,
+        counter: 10,
+        health: 15,
         attNum: 0
       }
       var enemy3 = {
         which: 3,
-        counter: 6,
-        health: 12,
+        counter: 5,
+        health: 5,
         attNum: 0
       }
       var enemy4 = {
         which: 4,
-        counter: 5,
-        health: 20,
+        counter: 10,
+        health: 30,
         attNum: 0
       }
 
@@ -154,11 +154,9 @@
 
     //Figures out which character you selected
     var b = 0; var c = 0;
-    var choice = false;
-    //Which Character did you click
     $("#char1").on("click", function(){
       b = 1;
-      $('img#player').attr('src', 'images/meh.png')
+      $('img#player').attr('src', 'images/boomerDance.gif')
     })
     $("#char2").on("click", function(){
       b = 2;
@@ -170,27 +168,27 @@
     })
     $("#char4").on("click", function(){
       b = 4;
-      $('img#player').attr('src', 'images/rrr.png')
+      $('img#player').attr('src', 'images/boomerDrink.jpg')
     })
 
     //Which Enemy did you click
     $("#enemy1").on("click", function(){
       c = 1;
-      $('img#opponent').attr('src', 'hatticus.png')
+      $('img#opponent').attr('src', 'images/meh.png')
       console.log(c)
     })
     $("#enemy2").on("click", function(){
       c = 2;
-      $('img#opponent').attr('src', 'hatticus.png')
+      $('img#opponent').attr('src', 'images/zoomerDance.jpg')
       console.log(c)
     })
     $("#enemy3").on("click", function(){
-      $('img#opponent').attr('src', 'hatticus.png')
+      $('img#opponent').attr('src', 'images/hatticus.png')
       c = 3;
       console.log(c)
     })
     $("#enemy4").on("click", function(){
-      $('img#opponent').attr('src', 'hatticus.png')
+      $('img#opponent').attr('src', 'images/rrr.png')
       c = 4;
       console.log(c)
     })
